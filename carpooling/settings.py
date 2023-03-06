@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'usercreationApp'
+    'authentication',
+    'docverify',
+    'mainride',
+    
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'carpooling.urls'
@@ -131,6 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+AUTH_USER_MODEL = "authentication.User"
 
 
 EMAIL_USE_TLS = True  
@@ -138,3 +143,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'hrithikhadawale75@gmail.com'  
 EMAIL_HOST_PASSWORD = 'HRITHIK1404'  
 EMAIL_PORT = 587  
+
+MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiaHJpdGhpazczNzgiLCJhIjoiY2xldjZsajdlMHdlMDNzczA2cXdjOTAwNiJ9.wtRhL78XI7ztD86nhTcmgg'

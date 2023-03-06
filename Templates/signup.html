@@ -34,18 +34,13 @@ rel="stylesheet"
                         {% csrf_token %}
 
                         <div class="row ">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-14 mb-4">
                                 <div class="form-outline  ">
                                     <input type="text" id="form3Example1q" class="form-control " name='fname' required/>
-                                    <label class="form-label required" for="form3Example1q">First Name</label>
+                                    <label class="form-label required" for="form3Example1q">Full Name</label>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="form-outline ">
-                                    <input type="text" id="form3Example1q" class="form-control" name='lname'required/>
-                                    <label class="form-label required" for="form3Example1q">Last Name</label>
-                                </div>
-                            </div>
+                          
                         </div>
                         
                         <div class="row ">
@@ -100,7 +95,7 @@ rel="stylesheet"
                         <div class="row">
                             <div class="col mb-4">
                                 <div class="form-outline input-group">
-                                    <input type="password" id="pass" class="form-control" name='password' required/>
+                                    <input type="password" id="pass" class="form-control" name='pass1' required/>
                                     <label class="form-label required" for="form3Example1q">Password</label>
                                     <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" onclick="showpass1()"><i class="fa fa-eye-slash" id="togglePassword" aria-hidden="true"></i></button>
                                     
@@ -125,7 +120,7 @@ rel="stylesheet"
                             </div>
                             <div class="col mb-4">
                                 <div class="form-outline input-group" id="show_hide_password">
-                                    <input type="password" id="confpass" class="form-control" name="cpssword" required />
+                                    <input type="password" id="confpass" class="form-control" name="pass2" required />
                                     <label class="form-label required" for="form3Example1q">Confirm Password</label>
                                     <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" onclick="showpass()"><i class="fa fa-eye-slash" id="togglePassword" aria-hidden="true"></i></button>
                                 </div>
