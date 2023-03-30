@@ -30,15 +30,15 @@
             <div class="position-sticky pt-3 sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">
+                  <a class="nav-link active" aria-current="page" href="#">
                     <span data-feather="home" class="align-text-bottom"></span>
                     Dashboard
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="prevrideDtails">
+                  <a class="nav-link" href="#">
                     <span data-feather="file" class="align-text-bottom"></span>
-                    Previous Rides Details
+                    Orders
                   </a>
                 </li>
                 <li class="nav-item">
@@ -108,18 +108,17 @@
     <!-- post -->
     <section class="container-fluid py-4 mt-4 mx-auto col  col-xl-4 col-lg-6 ">
         <div className="d-flex flex-column p-4 justify-content-center">
-          {% for ride in rides  %}
           
             <div class="card mb-4">
                 <div class="author p-3 mx-3 align-items-center">
                     <img src="../../../static/img/bruce-mars.jpg" alt="..." class="avatar shadow">
                     <div class="name ps-3">
-                      <span>{{ride.did.fname}}</span>
+                      <span>{{prevride.did.fname}}</span>
                       <div class="stats">
-                        <small>{{ride.autodate}}</small>
+                        <small>{{prevride.autodate}}</small>
                       </div>
                     </div>
-                  </div>
+                </div>
                 
                 <div class="card-body pt-2"> 
                     <div class="d-flex flex-row">
@@ -130,9 +129,9 @@
                                 <i class="fa-solid fa-street-view text-info text-gradient"></i>
                               </span>
                               <div class="timeline-content">
-                                <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{ride.from_address}}</h6>
+                                <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{prevride.from_address}}</h6>
                                 
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ride.date | date:'M d, Y'}} <br>   {{ride.time}} </p>
+                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{prevride.date | date:'M d, Y'}} <br>   {{prevride.time}} </p>
                                
                               </div>
                               
@@ -143,14 +142,14 @@
                                   <i class="fa-solid fa-location-dot text-info text-gradient"></i>
                                 </span>
                                 <div class="timeline-content ">
-                                  <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{ride.to_address}}</h6>
+                                  <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{prevride.to_address}}</h6>
                                 </div>
                               </div>
                         </div>
                         <div class="col-8 px-3">
-                            <span class=" text-dark text-uppercase text-lg font-weight-bold my-2"> ₹ {{ride.price}}</span>
+                            <span class=" text-dark text-uppercase text-lg font-weight-bold my-2"> ₹ {{prevride.price}}</span>
                             <p class="card-title font-weight-bold d-block text-dark ">
-                              Available Seats : {{ride.available_seats}}
+                              Available Seats : {{prevride.available_seats}}
                             </p>
                             <small class="card-text">
                                 Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
@@ -162,12 +161,22 @@
                   
                 </div>
                 <div class="text-center mx-3">
-                  <a href="{% url 'chatview' %}" class="btn btn-info text-white" role="button" aria-pressed="true">Lets chat</a>
-                  <a href="{% url 'request_ride' ride.id %}" class="btn btn-info text-white" role="button" aria-pressed="true">Request For Ride</a>
-                </div>
+                  {% if  prevridedetail.booked %}
+                    <a href="{% url 'chatview' %}" class="btn btn-info text-white" role="button" aria-pressed="true">Lets chat</a>
+                        <button  class="btn" type='text' style="background-color:#acc4f3" value="Booked" >Booked<i class="fa fa-check" style="color:green;font-size:25px"></i></button>
+                    {% elif prevridedetail.rejected %}
+                    <button  class="btn" type='text-white' style="background-color:red;color:white" value="Booked" >Rejected<i class="fa fa-ban" style="color:white;font-size:15px;padding:5px"></i></button>
+
+                    {% else %}
+                    <a href="{% url 'chatview' %}" class="btn btn-info text-white" role="button" aria-pressed="true">Lets chat</a>
+
+                        <button  class="btn" type='text' style="background-color:#acc4f3" value="Booked" >Booking Pending<i class="fa fa-exclamation-triangle" style="color:orange;font-size:17px;padding:4px"></i></button>
+
+                    {% endif %}
+
+                </div> 
             
             </div>
-            {% endfor %}
 
               <!--  -->
              
@@ -177,8 +186,81 @@
     </section>
     
     <!-- post -->
+    <section class="container-fluid py-4 mt-4 mx-auto col  col-xl-4 col-lg-6 ">
+        <h3>All Previous Ride Details</h3>
+
+        <div className="d-flex flex-column p-4 justify-content-center">
+          {% for prevride in allprevdetails %}
+          
+            <div class="card mb-4">
+                <div class="author p-3 mx-3 align-items-center">
+                    <img src="../../../static/img/bruce-mars.jpg" alt="..." class="avatar shadow">
+                    <div class="name ps-3">
+                      <span>{{prevride.did.fname}}</span>
+                      <div class="stats">
+                        <small>{{prevride.autodate}}</small>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="card-body pt-2"> 
+                    <div class="d-flex flex-row">
+                        <div class="timeline timeline-one-side col-4 mx-3">
+                            <div class="timeline-block mb-3">
+                              <span class="timeline-step">
+                                <!-- <i class="ni ni-bell-55 text-success text-gradient"></i> -->
+                                <i class="fa-solid fa-street-view text-info text-gradient"></i>
+                              </span>
+                              <div class="timeline-content">
+                                <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{prevride.from_address}}</h6>
+                                
+                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{prevride.date | date:'M d, Y'}} <br>   {{prevride.time}} </p>
+                               
+                              </div>
+                              
+                            </div>
+    
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                  <i class="fa-solid fa-location-dot text-info text-gradient"></i>
+                                </span>
+                                <div class="timeline-content ">
+                                  <h6 class="text-primary card-title h6 font-weight-bold mb-0">{{prevride.to_address}}</h6>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-8 px-3">
+                            <span class=" text-dark text-uppercase text-lg font-weight-bold my-2"> ₹ {{prevride.price}}</span>
+                            <p class="card-title font-weight-bold d-block text-dark ">
+                              Available Seats : {{prevride.available_seats}}
+                            </p>
+                            <small class="card-text">
+                                Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
+                            </small>
+                        </div>
+                    </div>
+                    
+                  
+                  
+                </div>
+                {% comment %} <div class="text-center mx-3">
+                    <a href="{% url 'chatview' %}" class="btn btn-info text-white" role="button" aria-pressed="true">Lets chat</a>
+                    {% if  prevridedetail.booked %}
+                        <button  class="btn" type='text' style="background-color:#acc4f3" value="Booked" >Booked<i class="fa fa-check" style="color:green;font-size:25px"></i></button>
+                    {% else %}
+                        <button  class="btn" type='text' style="background-color:#acc4f3" value="Booked" >Booking Pending<i class="fa fa-exclamation-triangle" style="color:orange;font-size:17px;padding:4px"></i></button>
+
+                    {% endif %}
+
+                </div>  {% endcomment %}
+            
+            </div>
+            {% endfor %}
+
+              <!--  -->
+             
         </div>
-    </div>
+    </section>
     <!-- filter -->
     
     

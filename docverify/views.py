@@ -30,7 +30,7 @@ def aadhar(request):
         no = request.POST.get('number')
     file = request.FILES.get('file')
     user =request.user
-    doc = aadharmodel.objects.create(did=user,aadharimg=file,aadharno=no)
+    doc = aadharmodel.objects.create(did=user,aadharimg=file,aadharno=no,verified=True)
     doc.save()
     # verify_aadhaar_from_image(aadharmodel.objects.get(did=user).aadharimg)
     # return HttpResponse("done")
@@ -49,7 +49,7 @@ def pan(request):
         file = request.FILES.get('file')
     
         user =request.user
-        doc = panmodel.objects.create(did=user,panimg=file,panno=no)
+        doc = panmodel.objects.create(did=user,panimg=file,panno=no,verified=True)
         doc.save()
 
     return redirect('userprofile')
@@ -60,7 +60,7 @@ def drivinglic(request):
         file = request.FILES.get('file')
     
         user =request.user
-        doc = drivingmodel.objects.create(did=user,drivinglicimg=file,drivinglicno=no)
+        doc = drivingmodel.objects.create(did=user,drivinglicimg=file,drivinglicno=no,verified=True)
         doc.save()
     return redirect('userprofile')
 

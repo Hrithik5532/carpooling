@@ -2,7 +2,6 @@
 from django.urls import path
 from .views import *
 urlpatterns = [
-    path('',index, name='home'),
     path('signup',signup,name='signup'),
     path('logout',logout_view,name='logout'),
     # path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',  
@@ -15,5 +14,5 @@ urlpatterns = [
     path('chatview',chatview,name='chatview'),    
     path('mapview',mapview,name='mapview'),    
     path('riderhome',riderhome,name='ridehome'),    
-
+    path('ride/details',rideDtails,name='prevrideDtails')
 ]

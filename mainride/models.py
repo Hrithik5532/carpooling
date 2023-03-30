@@ -5,6 +5,7 @@ from authentication.models import User
 token = 'sk.eyJ1IjoiaHJpdGhpazczNzgiLCJhIjoiY2xldjZvNzdqMXd5ajN5cDRiczBtZTc5eiJ9.zTWI4wn4nYSFC07frUmTTA'
 class createRideLoc(models.Model):
     did = models.ForeignKey(User,on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
     autodate = models.DateTimeField(auto_now=True)
     from_address =  models.TextField()
     from_lat = models.FloatField(blank=True,null=True)
@@ -22,7 +23,11 @@ class createRideLoc(models.Model):
     model =models.CharField(max_length=100,blank=True,null=True)
     fueltype =models.CharField(max_length=100,blank=True,null=True)
 
+    available_seats = models.IntegerField(blank=True,null=True)
 
+    def __str__(self):
+        return str(self.id)
+    
     # def save(self,*args, **kwargs):
     #     g = geocoder.mapbox(self.from_address,key=token)
     #     g =g.latlng
@@ -35,3 +40,18 @@ class createRideLoc(models.Model):
 
 
     #     return super(createRideLoc,self).save(*args, **kwargs)
+
+
+class request_ride_data(models.Model):
+    did = models.ForeignKey(User, on_delete=models.CASCADE)
+    ride_id = models.ForeignKey(createRideLoc,on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
+    pickup = models.CharField(max_length=1000)
+    drop = models.CharField(max_length=1000)
+    booked = models.BooleanField(default=False)
+    payment = models.BooleanField(default=False)
+    rejected = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.id)
+    
